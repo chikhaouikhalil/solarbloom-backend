@@ -50,6 +50,10 @@ export const signUp = expressAsyncHandler(async (req, res) => {
       lastname,
       password,
       garden: [],
+      temperature_records: [],
+      humidity_records: [],
+      soil: null,
+      soilCheckedAt: null,
     });
     const newUser = await db.collection("users").findOne({ email });
     delete newUser.password;
@@ -88,6 +92,10 @@ export const getUserData = expressAsyncHandler(async (req, res) => {
           firstname: { $first: "$firstname" },
           lastname: { $first: "$lastname" },
           garden: { $push: "$garden" }, // Push back the garden array with expanded plant data
+          soil: { $first: "$soil" },
+          soilCheckedAt: { $first: "$soilCheckedAt" },
+          temperature_records: { $first: "$temperature_records" },
+          humidity_records: { $first: "$humidity_records" },
         },
       },
     ])
