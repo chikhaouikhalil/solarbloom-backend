@@ -1,11 +1,12 @@
 import { connectToServer, getDb } from "./mongodb.js";
-import { PLANTS } from "./plants.js";
+
+import { newPlants } from "./newPlants.js";
 
 const addplants = async () => {
   await connectToServer();
   const db = getDb();
   await db.collection("plants").deleteMany({});
-  await db.collection("plants").insertMany(PLANTS);
+  await db.collection("plants").insertMany(newPlants);
   console.log("kammalt");
 };
 
